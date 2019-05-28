@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "37905746754",
+    "firebase_url": "https://schulprojekt-14e30.firebaseio.com",
+    "project_id": "schulprojekt-14e30",
+    "storage_bucket": "schulprojekt-14e30.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:37905746754:android:82aa990881d74446",
+        "android_client_info": {
+          "package_name": "de.eit7.rvwbk.rominakehl.notizbuchapp2019"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "37905746754-p8nan5thejvp35nols06m1alkvs6rvqa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDt7XwPrGEBneMQSq3Mu_AvMzyWFI-sMIE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "37905746754-p8nan5thejvp35nols06m1alkvs6rvqa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:37905746754:android:df5fd5a35f359b5e",
+        "android_client_info": {
+          "package_name": "de.rvwbk.eit72.bombenentschaerfenapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "37905746754-p8nan5thejvp35nols06m1alkvs6rvqa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDt7XwPrGEBneMQSq3Mu_AvMzyWFI-sMIE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "37905746754-p8nan5thejvp35nols06m1alkvs6rvqa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

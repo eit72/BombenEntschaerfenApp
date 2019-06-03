@@ -82,11 +82,9 @@ db.collection("users").document("user")
 ```
 ODER
 ```Java
-DocumentReference washingtonRef = db.collection("users").document("user");
+DocumentReference user = db.collection("users").document("user");
 
-// Set the "isCapital" field of the city 'DC'
-user
-        .update("capital", true)
+user.update("key", "value")
         .addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {

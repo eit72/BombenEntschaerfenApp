@@ -80,6 +80,26 @@ data.put("is_super", true);
 db.collection("users").document("user")
   .set(data, SetOptions.merge());
 ```
+ODER
+```Java
+DocumentReference washingtonRef = db.collection("users").document("user");
+
+// Set the "isCapital" field of the city 'DC'
+user
+        .update("capital", true)
+        .addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                // Logic
+            }
+        })
+        .addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // Logic
+            }
+        });
+```
 
 3. Löschen
 ```Java 

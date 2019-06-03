@@ -31,7 +31,9 @@ public class QuestActivity extends AppCompatActivity {
 
     }
 
-    QuestActivity (String quest,String correctAnswer,List<String> answers){
+    public QuestActivity(){};
+
+    public QuestActivity (String quest,String correctAnswer,List<String> answers){
         List<Button> ansButtons =  null;
 
         for(Button b: ansButtons){

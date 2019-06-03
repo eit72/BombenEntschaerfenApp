@@ -117,3 +117,54 @@ db.collection("users").document("user")
 });
 
 ```
+
+Die Daten welche gesetzt werden können, können auch als eingene Klasse abgebildet werden.
+Beispiel: 
+
+```Java
+public class City {
+
+
+    private String name;
+    private String state;
+    private String country;
+    private boolean capital;
+    private long population;
+    private List<String> regions;
+
+    public City() {}
+
+    public City(String name, String state, String country, boolean capital, long population, List<String> regions) {
+        // ...
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public boolean isCapital() {
+        return capital;
+    }
+
+    public long getPopulation() {
+        return population;
+    }
+
+    public List<String> getRegions() {
+        return regions;
+    }
+
+}
+
+
+City city = new City("Los Angeles", "CA", "USA", false, 5000000L, Arrays.asList("west_coast", "sorcal"));
+db.collection("cities").document("LA").set(city);
+```

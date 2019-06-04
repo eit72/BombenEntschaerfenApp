@@ -12,8 +12,10 @@ import java.util.List;
 import de.rvwbk.eit72.bombenentschaerfenapp.quest.QuestButtonListener;
 
 public class QuestActivity extends AppCompatActivity {
-    List<Button> buttons = new ArrayList<Button>();
-    TextView question;
+    private List<Button> buttons = new ArrayList<Button>();
+    private TextView question;
+    private boolean success;
+    private boolean isFinished;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

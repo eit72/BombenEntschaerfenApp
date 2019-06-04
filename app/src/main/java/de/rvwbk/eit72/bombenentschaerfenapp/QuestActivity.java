@@ -9,6 +9,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.rvwbk.eit72.bombenentschaerfenapp.quest.QuestButtonListener;
+
 public class QuestActivity extends AppCompatActivity {
     List<Button> buttons = new ArrayList<Button>();
     TextView question;
@@ -37,15 +39,17 @@ public class QuestActivity extends AppCompatActivity {
     public QuestActivity (String quest,String correctAnswer,List<String> answers){
 
 
-        for(Button button: buttons){
-            button.setText(quest);
+        for(int i = 0; i < 4; i++){
+            Button button = buttons.get(i);
+            String text = answers.get(i);
 
-            button.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+            button.setText(text);
+            QuestButtonListener qbl = new QuestButtonListener();
+            if(text.equals(correctAnswer)){
+                qbl.setAnswer(true);
+            }
 
-                }
-            });
+            button.setOnClickListener(qbl);
         }
     }
 }

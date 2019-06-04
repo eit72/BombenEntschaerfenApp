@@ -6,7 +6,7 @@ import android.support.annotation.NonNull;
 import java.util.Objects;
 import java.util.UUID;
 
-public class Beacon implements Comparable<Beacon>{
+public class BeaconBean implements Comparable<BeaconBean>{
     private UUID uuid;
     private int major;
     private int minor;
@@ -14,7 +14,7 @@ public class Beacon implements Comparable<Beacon>{
     private Activity gameActivity;
     private String hintText;
 
-    public Beacon (UUID uuid, int major, int minor, int id, Activity gameActivity, String hintText){
+    public BeaconBean(UUID uuid, int major, int minor, int id, Activity gameActivity, String hintText){
         this.uuid = Objects.requireNonNull(uuid, "uuid must not be null");
         this.major = Objects.requireNonNull(major, "major must not be null");
         this.minor = Objects.requireNonNull(minor, "minor must not be null");
@@ -37,7 +37,7 @@ public class Beacon implements Comparable<Beacon>{
     }
 
     @Override
-    public int compareTo(@NonNull Beacon o) {
+    public int compareTo(@NonNull BeaconBean o) {
         return this.id - o.id;
     }
 
@@ -54,7 +54,7 @@ public class Beacon implements Comparable<Beacon>{
         if(obj == null || obj.getClass()!= this.getClass())
             return false;
 
-        Beacon other = (Beacon) obj;
+        BeaconBean other = (BeaconBean) obj;
 
         return (other.uuid.equals(this.uuid) && other.major == this.major && other.minor == this.minor && other.id == this.id && this.gameActivity.equals(other.gameActivity) && this.hintText.equals(other.hintText));
     }

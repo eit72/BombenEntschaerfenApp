@@ -30,12 +30,26 @@ FirebaseFirestore db = FirebaseFirestore.getInstance();
 ```
 
 Mithilfe der aufgebauten Verbindung können dann komplette Samlungen oder einzelne Dokumente abgerufen werden:
+Dokument:
 ```Java
 db.collection("Sammlungsname")
         // Diese Zeile ist Optional und dient dazu ein bestimmtes 
         // Dokument in der zuvor angegebenen Sammlung zu finden
         .document("DokumentenID") 
         .get()
+        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                // Logic
+            }
+        });
+```
+
+Sammlung:
+```Java
+db.collection("Sammlungsname")
+        .get()
+        // Auf dem Typen achten: statt DocumentSnapshot muss QuerySnapshot genutzt werden
         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -80,6 +94,24 @@ data.put("is_super", true);
 db.collection("users").document("user")
   .set(data, SetOptions.merge());
 ```
+ODER
+```Java
+DocumentReference user = db.collection("users").document("user");
+
+user.update("key", "value")
+        .addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                // Logic
+            }
+        })
+        .addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                // Logic
+            }
+        });
+```
 
 3. Löschen
 ```Java 
@@ -98,4 +130,55 @@ db.collection("users").document("user")
     }
 });
 
+```
+
+Die Daten welche gesetzt werden können, können auch als eingene Klasse abgebildet werden.
+Beispiel: 
+
+```Java
+public class City {
+
+
+    private String name;
+    private String state;
+    private String country;
+    private boolean capital;
+    private long population;
+    private List<String> regions;
+
+    public City() {}
+
+    public City(String name, String state, String country, boolean capital, long population, List<String> regions) {
+        // ...
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public boolean isCapital() {
+        return capital;
+    }
+
+    public long getPopulation() {
+        return population;
+    }
+
+    public List<String> getRegions() {
+        return regions;
+    }
+
+}
+
+
+City city = new City("Los Angeles", "CA", "USA", false, 5000000L, Arrays.asList("west_coast", "sorcal"));
+db.collection("cities").document("LA").set(city);
 ```

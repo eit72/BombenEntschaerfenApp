@@ -45,6 +45,7 @@ public class QuestTimerActivity extends AppCompatActivity {
         super.onStop();
         if(success = true) {
             // implement reward here
+            //
         }
     }
 }

@@ -14,6 +14,7 @@ import java.util.UUID;
 public class BeaconHandler {
     private BeaconManager beaconManager;
     private ArrayList<BeaconRegion> regions;
+    private ArrayList<BeaconBean> beans;
     private BeaconHandlerCallback callback;
     private int currentIndex = -1;
     private boolean isConnected = false;
@@ -24,7 +25,8 @@ public class BeaconHandler {
         beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
             @Override
             public void onServiceReady() {
-                regions = BeaconRegionFactory.createRegions(uuid);
+                //regions = BeaconFactory.createRegions(uuid);
+                beans = BeaconFactory.getBeans(uuid);
                 isConnected = true;
                 listenToNext();
                 newCallback.OnConnected();
@@ -34,43 +36,48 @@ public class BeaconHandler {
         beaconManager.setMonitoringListener(new BeaconManager.BeaconMonitoringListener() {
             @Override
             public void onEnteredRegion(BeaconRegion beaconRegion, List<Beacon> beacons) {
-                callback.OnEnter(getRegionIndex(beaconRegion.getIdentifier()));
+                callback.OnEnter(getBeaconId(beaconRegion.getIdentifier()));
             }
 
             @Override
             public void onExitedRegion(BeaconRegion beaconRegion) {
-                callback.OnExit(getRegionIndex(beaconRegion.getIdentifier()));
+                callback.OnExit(getBeaconId(beaconRegion.getIdentifier()));
             }
         });
 
         beaconManager.setBackgroundScanPeriod(5000, 10000);
     }
 
-    public int getRegionIndex(String identifier){
-        for (int i = 0; i < regions.size(); i++) {
-            if (regions.get(i).getIdentifier() == identifier)
-                return i;
+    public int getBeaconId(String identifier){
+        //for (int i = 0; i < regions.size(); i++) {
+        //    if (regions.get(i).getIdentifier() == identifier)
+        //        return i;
+        //}
+
+        for (int i = 0; i < beans.size(); i++){
+            if (beans.get(i).getBeaconRegion().getIdentifier().equals(identifier) )
+                return beans.get(i).getId();
         }
 
         return -1;
     }
 
     public boolean listenToNext(){
-        if (regions == null || regions.isEmpty()){
+        if(beans == null || beans.isEmpty()){//if (regions == null || regions.isEmpty()){
             return false;
         }
 
         if (currentIndex != -1){
-            beaconManager.stopMonitoring(regions.get(currentIndex).getIdentifier());
+            beaconManager.stopMonitoring(beans.get(currentIndex).getBeaconRegion().getIdentifier());
         }
 
         currentIndex++;
 
-        if (currentIndex > regions.size() - 1){
+        if (currentIndex > beans.size() - 1){
             return false;
         }
 
-        beaconManager.startMonitoring(regions.get(currentIndex));
+        beaconManager.startMonitoring(beans.get(currentIndex).getBeaconRegion());
 
         return true;
     }
@@ -81,8 +88,8 @@ public class BeaconHandler {
 
     // Debug only
     public void listenToAll(){
-        for (BeaconRegion region : regions){
-            beaconManager.startMonitoring(region);
+        for (BeaconBean bean : beans){
+            beaconManager.startMonitoring(bean.getBeaconRegion());
         }
     }
 

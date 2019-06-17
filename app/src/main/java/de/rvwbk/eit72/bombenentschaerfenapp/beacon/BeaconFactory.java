@@ -7,16 +7,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class BeaconRegionFactory {
-    private static ArrayList<BeaconBean> availableBeacons = getAvailableBeacons();
+public class BeaconFactory {
+    private static ArrayList<BeaconBean> availableBeacons = new ArrayList<>();
     private static UUID currentUUID;
-
-    private static ArrayList<BeaconBean> getAvailableBeacons(){
-        ArrayList<BeaconBean> beans = new ArrayList<>();
-        for (int i = 0; i < getAvailableBeaconMinMaj().size(); i++) {
-
-        }
-    }
 
     private static Map<Integer, Integer> getAvailableBeaconMinMaj(){
         Map<Integer, Integer> result = new HashMap<>();
@@ -33,10 +26,30 @@ public class BeaconRegionFactory {
         return result;
     }
 
+    public static ArrayList<BeaconBean> getBeans(UUID beaconUUID){
+        if (availableBeacons.isEmpty()){
+            currentUUID = beaconUUID;
+            ArrayList<BeaconBean> beans = new ArrayList<>();
+            int idCounter = 0;
+
+            for (Map.Entry<Integer, Integer> keyValue : getAvailableBeaconMinMaj().entrySet()) {
+                BeaconBean bean = new BeaconBean(beaconUUID, keyValue.getValue(), keyValue.getKey(), idCounter, null, "Hint No." + String.valueOf(idCounter));
+
+                idCounter++;
+
+                beans.add(bean);
+            }
+
+            availableBeacons = beans;
+        }
+
+        return availableBeacons;
+    }
+
     public static ArrayList<BeaconRegion> createRegions(UUID beaconUUID){
         currentUUID = beaconUUID;
         ArrayList<BeaconRegion> regions = new ArrayList<>();
-        for (Map.Entry<Integer, Integer> keyValue : availableBeacons.entrySet()) {
+        for (Map.Entry<Integer, Integer> keyValue : getAvailableBeaconMinMaj().entrySet()) {
             BeaconRegion newRegion = getRegion(beaconUUID, keyValue.getValue(), keyValue.getKey());
 
             regions.add(newRegion);

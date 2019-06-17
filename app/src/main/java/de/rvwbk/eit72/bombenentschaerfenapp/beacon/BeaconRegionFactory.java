@@ -16,6 +16,7 @@ public class BeaconRegionFactory {
         for (int i = 0; i < getAvailableBeaconMinMaj().size(); i++) {
 
         }
+        return null;
     }
 
     private static Map<Integer, Integer> getAvailableBeaconMinMaj(){
@@ -36,11 +37,11 @@ public class BeaconRegionFactory {
     public static ArrayList<BeaconRegion> createRegions(UUID beaconUUID){
         currentUUID = beaconUUID;
         ArrayList<BeaconRegion> regions = new ArrayList<>();
-        for (Map.Entry<Integer, Integer> keyValue : availableBeacons.entrySet()) {
+/*        for (Map.Entry<Integer, Integer> keyValue : availableBeacons.entrySet()) {
             BeaconRegion newRegion = getRegion(beaconUUID, keyValue.getValue(), keyValue.getKey());
 
             regions.add(newRegion);
-        }
+        }*/
 
         return regions;
     }

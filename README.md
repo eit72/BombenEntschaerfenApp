@@ -30,12 +30,26 @@ FirebaseFirestore db = FirebaseFirestore.getInstance();
 ```
 
 Mithilfe der aufgebauten Verbindung können dann komplette Samlungen oder einzelne Dokumente abgerufen werden:
+Dokument:
 ```Java
 db.collection("Sammlungsname")
         // Diese Zeile ist Optional und dient dazu ein bestimmtes 
         // Dokument in der zuvor angegebenen Sammlung zu finden
         .document("DokumentenID") 
         .get()
+        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                // Logic
+            }
+        });
+```
+
+Sammlung:
+```Java
+db.collection("Sammlungsname")
+        .get()
+        // Auf dem Typen achten: statt DocumentSnapshot muss QuerySnapshot genutzt werden
         .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {

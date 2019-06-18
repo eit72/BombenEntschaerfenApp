@@ -14,14 +14,14 @@ public class QuizActivity extends AppCompatActivity {
 
     String question = "does this work?";
     String answer = "true";
-    String[] answers = {"false,false,true,false"};
+    String[] answers = {"false","false","true","false"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        System.out.println("on create quiz");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
-
+        System.out.println("on create quiz");
         Button startButton = findViewById(R.id.button_quiz_start);
         //Intent intent = getIntent();
 
@@ -41,16 +41,19 @@ public class QuizActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+       // System.out.println("on RESUME quiz");
 
         Intent resultIntent = new Intent();
         resultIntent.putExtra("points", points);
-        finish();
+        System.out.println("points   " + points);
+     //   finish();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        System.out.println("on onActivityResult requestCode " + requestCode);
+        System.out.println("on onActivityResult resultCode " + (resultCode == RESULT_OK));
         if(requestCode == MainActivity.QUIZREQUESTCODE) {
             if(resultCode == RESULT_OK) {
                 boolean questionSolved = data.getBooleanExtra("questionSolved", false);

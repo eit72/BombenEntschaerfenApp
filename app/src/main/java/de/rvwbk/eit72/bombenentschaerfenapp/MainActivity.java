@@ -13,11 +13,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        System.out.println("on create main");
         // start quiz
         Intent quizIntent = new Intent(MainActivity.this, QuizActivity.class);
-        //startActivityForResult(quizIntent, QUIZREQUESTCODE);
-        startActivity(quizIntent);
+        startActivityForResult(quizIntent, QUIZREQUESTCODE);
+        //startActivity(quizIntent);
     }
 
 
@@ -33,4 +33,5 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
 }

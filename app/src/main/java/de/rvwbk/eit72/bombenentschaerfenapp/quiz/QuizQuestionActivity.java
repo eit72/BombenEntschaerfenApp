@@ -38,6 +38,7 @@ public class QuizQuestionActivity extends AppCompatActivity {
         answerButtons.add(answerButton3);
         answerButtons.add(answerButton4);
 
+        questionView.setText(question);
 
         for(int i = 0; i < 4; i++) {
             Button answerButton = answerButtons.get(i);
@@ -49,6 +50,8 @@ public class QuizQuestionActivity extends AppCompatActivity {
                 public void onClick(View view) {
                     Intent resultIntent = new Intent();
                     resultIntent.putExtra("questionSolved", buttonText.equals(answer));
+                    System.out.println(buttonText.equals(answer));
+                    setResult(RESULT_OK, resultIntent);
                     finish();
                 }
             });

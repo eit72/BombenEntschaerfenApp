@@ -12,10 +12,6 @@ import java.util.List;
 import de.rvwbk.eit72.bombenentschaerfenapp.R;
 import de.rvwbk.eit72.bombenentschaerfenapp.beacon.BeaconViewDetail;
 
-import static de.rvwbk.eit72.bombenentschaerfenapp.beacon.BeaconStatus.ACTIVE;
-import static de.rvwbk.eit72.bombenentschaerfenapp.beacon.BeaconStatus.PASSED;
-import static de.rvwbk.eit72.bombenentschaerfenapp.beacon.BeaconStatus.PENDING;
-
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.MyViewHolder> {
     private List<BeaconViewDetail> mDataset;
 

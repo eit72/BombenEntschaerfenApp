@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".overview.OverviewActivity" />
-        <activity android:name=".walkthrough.WalkthroughActivity" />
+        <activity android:name=".walkthrough.WalkthroughActivity"
+        android:theme="@style/Theme.AppCompat.NoActionBar" />
     </application>
 
 </manifest>

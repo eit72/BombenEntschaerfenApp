@@ -35,10 +35,10 @@ public class SlideAdapter extends PagerAdapter {
     }   ;
     // list of descriptions
     private String[] lst_description = {
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,"
+            "Herzlich Willkommen am Richard-von-Weizsäcker Berufskolleg in Paderborn. Zur Begrüßung und zum näheren Kennenlernen der Schule haben wir eine Art „interaktive Schnitzeljagd“ für dich vorbereitet.  ",
+            "Das RVWBK und seine Schüler schweben nämlich in großer Gefahr! Eine unbekannte Organisation hat eine Bombe in der Schule versteckt. Nur DU allein kannst dabei helfen, diese Bomben zu entschärfen. Aber wie genau funktioniert das?",
+            "In der Schule sind Beacons (Signalstationen) versteckt, welche gesucht werden müssen. Diese Beacons haben verschiedene Aufgaben hinterlegt, welche nach erfolgreicher Lösung mit einem Codeschnipsel belohnt werden! ",
+            "Wenn alle Aufgaben erfolgreich bearbeitet wurden ergibt sich ein Lösungswort aus allen Codeschnipseln. Mit diesem Lösungswort kann die Bombe entschärft und DU zum Helden des gesamten RVWBK gemacht werden! "
     };
     // list of background colors
     private int[]  lst_backgroundcolor = {

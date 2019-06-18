@@ -19,23 +19,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_walkthrough);
 
-        handler = new BeaconHandler(getApplicationContext(), getUUID(), new BeaconHandlerCallback() {
-            @Override
-            public void OnEnter(int index) {
-                Toast.makeText(getApplicationContext(), "Entered: " + String.valueOf(index), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void OnExit(int index) {
-                Toast.makeText(getApplicationContext(), "Exited: " + String.valueOf(index), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void OnConnected(){
-                handler.listenToAll();
-            }
-        });
-
         Intent intent = new Intent(this, WalkthroughActivity.class);
         this.startActivity(intent);
     }

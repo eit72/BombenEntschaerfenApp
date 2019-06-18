@@ -16,6 +16,7 @@ public class BeaconBean implements Comparable<BeaconBean>, BeaconViewDetail {
     private BeaconRegion beaconRegion;
     private Activity gameActivity;
     private String hintText;
+    private BeaconStatus status = BeaconStatus.PENDING;
 
     public BeaconBean(UUID uuid, int major, int minor, int id, Activity gameActivity, String hintText){
         this.uuid = Objects.requireNonNull(uuid, "uuid must not be null");
@@ -78,6 +79,10 @@ public class BeaconBean implements Comparable<BeaconBean>, BeaconViewDetail {
 
     @Override
     public BeaconStatus getStatus() {
-        return BeaconStatus.ACTIVE;
+        return this.status;
+    }
+
+    public void setBeaconStatus(BeaconStatus status){
+       this.status =  status;
     }
 }

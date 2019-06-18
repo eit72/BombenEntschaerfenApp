@@ -20,13 +20,14 @@ public class BeaconHandler {
     private boolean isConnected = false;
 
     public BeaconHandler(Context context, final UUID uuid, final BeaconHandlerCallback newCallback){
+        beans = BeaconFactory.getBeans(uuid);
         callback = newCallback;
         beaconManager = new BeaconManager(context);
         beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
             @Override
             public void onServiceReady() {
                 //regions = BeaconFactory.createRegions(uuid);
-                beans = BeaconFactory.getBeans(uuid);
+
                 isConnected = true;
                 listenToNext();
                 newCallback.OnConnected();
@@ -68,7 +69,9 @@ public class BeaconHandler {
         }
 
         if (currentIndex != -1){
-            beaconManager.stopMonitoring(beans.get(currentIndex).getBeaconRegion().getIdentifier());
+            BeaconBean beacon = beans.get(currentIndex);
+            beacon.setBeaconStatus(BeaconStatus.PENDING);
+            beaconManager.stopMonitoring(beacon.getBeaconRegion().getIdentifier());
         }
 
         currentIndex++;
@@ -76,8 +79,9 @@ public class BeaconHandler {
         if (currentIndex > beans.size() - 1){
             return false;
         }
-
-        beaconManager.startMonitoring(beans.get(currentIndex).getBeaconRegion());
+        BeaconBean beacon = beans.get(currentIndex);
+        beacon.setBeaconStatus(BeaconStatus.ACTIVE);
+        beaconManager.startMonitoring(beacon.getBeaconRegion());
 
         return true;
     }

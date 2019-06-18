@@ -27,16 +27,6 @@ public class OverviewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
 
-        recyclerView = findViewById(R.id.recycler);
-        recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-
-        // Hier anstatt des Arrays mit Strings die Objekte übergeben
-        // Liste der Beacons an den Adapter übergeben
-        mAdapter = new TaskAdapter(beaconViewDetails);
-
-        recyclerView.setAdapter(mAdapter);
 
         handler = new BeaconHandler(getApplicationContext(), getUUID(), new BeaconHandlerCallback() {
             @Override
@@ -56,6 +46,18 @@ public class OverviewActivity extends AppCompatActivity {
         });
 
         this.beaconViewDetails.addAll(handler.getAllBeacons());
+
+        recyclerView = findViewById(R.id.recycler);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        // Hier anstatt des Arrays mit Strings die Objekte übergeben
+        // Liste der Beacons an den Adapter übergeben
+        mAdapter = new TaskAdapter(beaconViewDetails);
+
+        recyclerView.setAdapter(mAdapter);
+
     }
 
     private UUID getUUID(){

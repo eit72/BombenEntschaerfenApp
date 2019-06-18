@@ -8,7 +8,7 @@ import com.estimote.coresdk.observation.region.beacon.BeaconRegion;
 import java.util.Objects;
 import java.util.UUID;
 
-public class BeaconBean implements Comparable<BeaconBean>{
+public class BeaconBean implements Comparable<BeaconBean>, BeaconViewDetail {
     private UUID uuid;
     private int major;
     private int minor;
@@ -69,5 +69,15 @@ public class BeaconBean implements Comparable<BeaconBean>{
         BeaconRegion region = new BeaconRegion(String.valueOf(minor) + "_" + String.valueOf(major), uuid, major, minor);
 
         return region;
+    }
+
+    @Override
+    public String getTitle() {
+        return "";
+    }
+
+    @Override
+    public BeaconStatus getStatus() {
+        return BeaconStatus.ACTIVE;
     }
 }

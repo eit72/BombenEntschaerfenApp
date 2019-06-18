@@ -7,15 +7,19 @@ import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import de.rvwbk.eit72.bombenentschaerfenapp.R;
+import de.rvwbk.eit72.bombenentschaerfenapp.beacon.BeaconHandler;
+import de.rvwbk.eit72.bombenentschaerfenapp.beacon.BeaconHandlerCallback;
 import de.rvwbk.eit72.bombenentschaerfenapp.beacon.BeaconViewDetail;
 
 public class OverviewActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    private List<BeaconViewDetail> beaconViewDetails = new ArrayList<BeaconViewDetail>();
+    private List<BeaconViewDetail> beaconViewDetails = new ArrayList<>();
+    private BeaconHandler handler;
 
 
     @Override
@@ -34,5 +38,29 @@ public class OverviewActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(mAdapter);
 
+        handler = new BeaconHandler(getApplicationContext(), getUUID(), new BeaconHandlerCallback() {
+            @Override
+            public void OnEnter(int index) {
+
+            }
+
+            @Override
+            public void OnExit(int index) {
+
+            }
+
+            @Override
+            public void OnConnected() {
+
+            }
+        });
+
+        this.beaconViewDetails.addAll(handler.getAllBeacons());
+    }
+
+    private UUID getUUID(){
+        String str = getString(R.string.beacon_UUID);
+
+        return UUID.fromString(str);
     }
 }

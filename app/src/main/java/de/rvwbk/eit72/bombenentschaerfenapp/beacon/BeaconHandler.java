@@ -14,7 +14,7 @@ import java.util.UUID;
 public class BeaconHandler {
     private BeaconManager beaconManager;
     private ArrayList<BeaconRegion> regions;
-    private ArrayList<BeaconBean> beans;
+    private List<BeaconBean> beans;
     private BeaconHandlerCallback callback;
     private int currentIndex = -1;
     private boolean isConnected = false;
@@ -95,5 +95,11 @@ public class BeaconHandler {
 
     public void onDestroy(){
         beaconManager.disconnect();
+    }
+
+    public List<BeaconViewDetail> getAllBeacons(){
+        List<BeaconViewDetail> beaconViewList = new ArrayList<>();
+        beaconViewList.addAll(this.beans);
+        return beaconViewList;
     }
 }

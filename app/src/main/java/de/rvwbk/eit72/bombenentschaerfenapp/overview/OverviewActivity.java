@@ -41,7 +41,8 @@ public class OverviewActivity extends AppCompatActivity {
 
             @Override
             public void OnConnected() {
-
+                beaconViewDetails.addAll(handler.getAllBeacons());
+                mAdapter.notifyDataSetChanged();
             }
         });
 

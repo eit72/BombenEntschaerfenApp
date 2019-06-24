@@ -48,4 +48,9 @@ public class DatabaseHelper {
         DB.collection(collectionName).add(document);
       }
     }
+
+    public static void insertNewUser(HashMap<String, Object> usermap)
+    {
+      DB.collection("users").add(usermap);
+    }
 }

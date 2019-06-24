@@ -1,5 +1,6 @@
 package de.rvwbk.eit72.bombenentschaerfenapp.overview;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,7 +12,6 @@ import java.util.List;
 import java.util.UUID;
 
 import de.rvwbk.eit72.bombenentschaerfenapp.R;
-import de.rvwbk.eit72.bombenentschaerfenapp.beacon.BeaconBean;
 import de.rvwbk.eit72.bombenentschaerfenapp.beacon.BeaconHandler;
 import de.rvwbk.eit72.bombenentschaerfenapp.beacon.BeaconHandlerCallback;
 import de.rvwbk.eit72.bombenentschaerfenapp.beacon.BeaconViewDetail;
@@ -31,24 +31,14 @@ public class OverviewActivity extends AppCompatActivity {
 
 
         handler = new BeaconHandler(getApplicationContext(), getUUID(), new BeaconHandlerCallback() {
-            @Override
-            public void OnEnter(int index) {
-                Toast.makeText(getApplicationContext(), "Started Activity", Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void OnExit(int index) {
-
-            }
 
             @Override
             public void OnConnected() {
                 beaconViewDetails = new ArrayList<>(handler.getAllBeacons());
-                handler.listenToAll();
             }
 
             @Override
-            public void OnStatusChanged(int id){
+            public void OnStatusChanged(int id) {
                 NotifyChanged(id);
             }
         });
@@ -89,5 +79,12 @@ public class OverviewActivity extends AppCompatActivity {
             int index = beaconViewDetails.indexOf(detail);
             mAdapter.notifyItemChanged(index);
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        this.handler.listenToNext();
     }
 }

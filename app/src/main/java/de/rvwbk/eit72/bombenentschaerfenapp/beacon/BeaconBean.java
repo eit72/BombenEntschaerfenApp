@@ -14,16 +14,16 @@ public class BeaconBean implements Comparable<BeaconBean>, BeaconViewDetail {
     private int minor;
     private int id;
     private BeaconRegion beaconRegion;
-    private Activity gameActivity;
+    private Class<? extends Activity> gameActivity;
     private String hintText;
     private BeaconStatus status = BeaconStatus.PENDING;
 
-    public BeaconBean(UUID uuid, int major, int minor, int id, Activity gameActivity, String hintText){
+    public BeaconBean(UUID uuid, int major, int minor, int id, Class<? extends Activity> gameActivity, String hintText){
         this.uuid = Objects.requireNonNull(uuid, "uuid must not be null");
         this.major = Objects.requireNonNull(major, "major must not be null");
         this.minor = Objects.requireNonNull(minor, "minor must not be null");
         this.id = Objects.requireNonNull(id, "id must not be null");
-        //this.gameActivity = Objects.requireNonNull(gameActivity, "gameActivity must not be null");
+        this.gameActivity = Objects.requireNonNull(gameActivity, "gameActivity must not be null");
         this.hintText = Objects.requireNonNull(hintText, "hintText must not be null");
         this.beaconRegion = Objects.requireNonNull(createRegion(uuid, major, minor), "beaconRegion must not be null");
     }
@@ -33,7 +33,7 @@ public class BeaconBean implements Comparable<BeaconBean>, BeaconViewDetail {
         return id;
     }
 
-    public Activity getGameActivity() {
+    public Class<? extends Activity> getGameActivity() {
         return gameActivity;
     }
 

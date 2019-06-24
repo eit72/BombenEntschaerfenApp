@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">BombenEntschaerfenApp</string>
     <string name="beacon_UUID">B9407F30-F5F8-466E-AFF9-25556B57FE6D</string>
+    <string name="title_activity_test">TestActivity</string>
 </resources>

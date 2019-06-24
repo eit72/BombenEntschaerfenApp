@@ -3,7 +3,6 @@ package de.rvwbk.eit72.bombenentschaerfenapp.beacon;
 import com.estimote.coresdk.observation.region.beacon.BeaconRegion;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -14,8 +13,9 @@ public class BeaconFactory {
 
     private static Map<Integer, Integer> getAvailableBeaconMinMaj(){
         Map<Integer, Integer> result = new LinkedHashMap<>();
-        result.put(53129, 22027);
+        result.put(49207, 47140);
         result.put(33721, 25165);
+        result.put(53129, 22027);
         result.put(6389, 16546);
         result.put(16049, 43534);
         result.put(9015, 62082);
@@ -34,8 +34,8 @@ public class BeaconFactory {
             ArrayList<BeaconBean> beans = new ArrayList<>();
             int idCounter = 0;
 
-            for (Map.Entry<Integer, Integer> keyValue : getAvailableBeaconMinMaj().entrySet()) {
-                BeaconBean bean = new BeaconBean(beaconUUID, keyValue.getValue(), keyValue.getKey(), idCounter, null, "Hint No." + String.valueOf(idCounter));
+            for(BeaconMapping beaconMapping : BeaconMapping.values()){
+                BeaconBean bean = new BeaconBean(beaconUUID, beaconMapping.getMajor(), beaconMapping.getMinor(), idCounter, beaconMapping.getGameActivity(), beaconMapping.getHintText());
 
                 idCounter++;
 

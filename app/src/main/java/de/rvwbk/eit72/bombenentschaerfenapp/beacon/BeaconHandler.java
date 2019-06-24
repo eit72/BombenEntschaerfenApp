@@ -2,6 +2,7 @@ package de.rvwbk.eit72.bombenentschaerfenapp.beacon;
 
 
 import android.content.Context;
+import android.content.Intent;
 
 import com.estimote.coresdk.observation.region.beacon.BeaconRegion;
 import com.estimote.coresdk.recognition.packets.Beacon;
@@ -9,9 +10,11 @@ import com.estimote.coresdk.service.BeaconManager;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
-public class BeaconHandler {
+public class BeaconHandler{
+    private Context context;
     private BeaconManager beaconManager;
     private ArrayList<BeaconRegion> regions;
     private List<BeaconBean> beans;
@@ -19,9 +22,10 @@ public class BeaconHandler {
     private int currentIndex = -1;
     private boolean isConnected = false;
 
-    public BeaconHandler(Context context, final UUID uuid, final BeaconHandlerCallback newCallback){
+    public BeaconHandler(Context context, final UUID uuid, final BeaconHandlerCallback callback){
+       this.context = Objects.requireNonNull(context, "context must not be null");
+       this.callback = callback;
         beans = BeaconFactory.getBeans(uuid);
-        callback = newCallback;
         beaconManager = new BeaconManager(context);
         beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
             @Override
@@ -30,37 +34,39 @@ public class BeaconHandler {
 
                 isConnected = true;
                 listenToNext();
-                newCallback.OnConnected();
+                callback.OnConnected();
             }
         });
 
         beaconManager.setMonitoringListener(new BeaconManager.BeaconMonitoringListener() {
             @Override
             public void onEnteredRegion(BeaconRegion beaconRegion, List<Beacon> beacons) {
-                callback.OnEnter(getBeaconId(beaconRegion.getIdentifier()));
+                BeaconBean beacon = getBeacon(beaconRegion.getIdentifier());
+                Intent intent = new Intent(BeaconHandler.this.context, beacon.getGameActivity());
+                BeaconHandler.this.context.startActivity(intent);
             }
 
             @Override
             public void onExitedRegion(BeaconRegion beaconRegion) {
-                callback.OnExit(getBeaconId(beaconRegion.getIdentifier()));
+                //nothing to do
             }
         });
 
-        beaconManager.setBackgroundScanPeriod(5000, 10000);
+        beaconManager.setBackgroundScanPeriod(1000, 1000);
     }
 
-    public int getBeaconId(String identifier){
+    public BeaconBean getBeacon(String identifier){
         //for (int i = 0; i < regions.size(); i++) {
         //    if (regions.get(i).getIdentifier() == identifier)
         //        return i;
         //}
 
-        for (int i = 0; i < beans.size(); i++){
-            if (beans.get(i).getBeaconRegion().getIdentifier().equals(identifier) )
-                return beans.get(i).getId();
+        for(BeaconBean beacon: this.beans){
+            if (beacon.getBeaconRegion().getIdentifier().equals(identifier) )
+                return beacon;
         }
 
-        return -1;
+        return null;
     }
 
     public boolean listenToNext(){

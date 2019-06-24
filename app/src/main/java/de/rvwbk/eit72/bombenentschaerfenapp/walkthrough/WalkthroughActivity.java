@@ -13,7 +13,7 @@ public class WalkthroughActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_walkthrough);
         viewPager = findViewById(R.id.viewpager);
         myadapter = new SlideAdapter(this);
         viewPager.setAdapter(myadapter);

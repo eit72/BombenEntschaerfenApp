@@ -4,6 +4,7 @@ import com.estimote.coresdk.observation.region.beacon.BeaconRegion;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -12,9 +13,10 @@ public class BeaconFactory {
     private static UUID currentUUID;
 
     private static Map<Integer, Integer> getAvailableBeaconMinMaj(){
-        Map<Integer, Integer> result = new HashMap<>();
+        Map<Integer, Integer> result = new LinkedHashMap<>();
+        result.put(53129, 22027);
+        result.put(33721, 25165);
         result.put(6389, 16546);
-        result.put(25165, 33721);
         result.put(16049, 43534);
         result.put(9015, 62082);
         result.put(22027,53129);

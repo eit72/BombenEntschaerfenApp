@@ -14,8 +14,8 @@ public class BeaconFactory {
 
     private static Map<Integer, Integer> getAvailableBeaconMinMaj(){
         Map<Integer, Integer> result = new LinkedHashMap<>();
-        result.put(33721, 25165);
         result.put(53129, 22027);
+        result.put(33721, 25165);
         result.put(6389, 16546);
         result.put(16049, 43534);
         result.put(9015, 62082);

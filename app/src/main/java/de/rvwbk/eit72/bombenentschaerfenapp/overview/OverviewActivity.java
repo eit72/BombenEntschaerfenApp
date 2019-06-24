@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ public class OverviewActivity extends AppCompatActivity {
         handler = new BeaconHandler(getApplicationContext(), getUUID(), new BeaconHandlerCallback() {
             @Override
             public void OnEnter(int index) {
-
+                Toast.makeText(getApplicationContext(), "Started Activity", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -41,8 +42,9 @@ public class OverviewActivity extends AppCompatActivity {
 
             @Override
             public void OnConnected() {
-                beaconViewDetails.addAll(handler.getAllBeacons());
+                beaconViewDetails = new ArrayList<>(handler.getAllBeacons());
                 mAdapter.notifyDataSetChanged();
+                handler.listenToAll();
             }
         });
 

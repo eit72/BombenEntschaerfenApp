@@ -70,7 +70,7 @@ public class BeaconHandler {
 
         if (currentIndex != -1){
             BeaconBean beacon = beans.get(currentIndex);
-            beacon.setBeaconStatus(BeaconStatus.PENDING);
+            SetBeaconStatus(beacon, BeaconStatus.PENDING);
             beaconManager.stopMonitoring(beacon.getBeaconRegion().getIdentifier());
         }
 
@@ -80,7 +80,7 @@ public class BeaconHandler {
             return false;
         }
         BeaconBean beacon = beans.get(currentIndex);
-        beacon.setBeaconStatus(BeaconStatus.ACTIVE);
+        SetBeaconStatus(beacon, BeaconStatus.ACTIVE);
         beaconManager.startMonitoring(beacon.getBeaconRegion());
 
         return true;
@@ -105,5 +105,10 @@ public class BeaconHandler {
         List<BeaconViewDetail> beaconViewList = new ArrayList<>();
         beaconViewList.addAll(this.beans);
         return beaconViewList;
+    }
+
+    private void SetBeaconStatus(BeaconBean bean, BeaconStatus status){
+        bean.setBeaconStatus(status);
+        callback.OnStatusChanged(bean.getId());
     }
 }

@@ -22,4 +22,10 @@ public interface BeaconViewDetail {
      * @return The current status of the beacon.
      */
     public BeaconStatus getStatus();
+
+    /**
+     * Returns the id of the beacon.
+     * @return The id of the beacon.
+     */
+    public int getId();
 }

@@ -4,4 +4,5 @@ public interface BeaconHandlerCallback {
     void OnEnter(int index);
     void OnExit(int index);
     void OnConnected();
+    void OnStatusChanged(int id);
 }

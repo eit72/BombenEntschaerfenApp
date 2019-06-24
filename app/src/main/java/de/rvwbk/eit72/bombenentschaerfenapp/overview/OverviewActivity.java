@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 import de.rvwbk.eit72.bombenentschaerfenapp.R;
+import de.rvwbk.eit72.bombenentschaerfenapp.beacon.BeaconBean;
 import de.rvwbk.eit72.bombenentschaerfenapp.beacon.BeaconHandler;
 import de.rvwbk.eit72.bombenentschaerfenapp.beacon.BeaconHandlerCallback;
 import de.rvwbk.eit72.bombenentschaerfenapp.beacon.BeaconViewDetail;
@@ -43,8 +44,12 @@ public class OverviewActivity extends AppCompatActivity {
             @Override
             public void OnConnected() {
                 beaconViewDetails = new ArrayList<>(handler.getAllBeacons());
-                mAdapter.notifyDataSetChanged();
                 handler.listenToAll();
+            }
+
+            @Override
+            public void OnStatusChanged(int id){
+                NotifyChanged(id);
             }
         });
 
@@ -67,5 +72,22 @@ public class OverviewActivity extends AppCompatActivity {
         String str = getString(R.string.beacon_UUID);
 
         return UUID.fromString(str);
+    }
+
+    private BeaconViewDetail getDetailById(int id){
+        for (BeaconViewDetail detail: beaconViewDetails) {
+            if (detail.getId() == id) return detail;
+        }
+
+        return null;
+    }
+
+    private void NotifyChanged(int id){
+        BeaconViewDetail detail = getDetailById(id);
+
+        if (detail != null){
+            int index = beaconViewDetails.indexOf(detail);
+            mAdapter.notifyItemChanged(index);
+        }
     }
 }

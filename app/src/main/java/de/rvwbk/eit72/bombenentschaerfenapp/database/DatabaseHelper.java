@@ -42,24 +42,10 @@ public class DatabaseHelper {
 
         return documents;
     }
-//DB.collection(collectionName)
-//    .add(user)
-//        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//    @Override
-//    public void onSuccess(DocumentReference documentReference) {
-//      Log.d("cTAG", "DocumentSnapshot added with ID: " + documentReference.getId());
-//    }
-//  })
-//    .addOnFailureListener(new OnFailureListener() {
-//    @Override
-//    public void onFailure(@NonNull Exception e) {
-//      Log.w("cTAG", "Error adding document", e);
-//    }
-//  });
+
     public static void insertCollection(String collectionName, List<HashMap<String, Object>> documents){
-      Iterator it = documents.iterator();
-      while(it.hasNext()){
-        DB.collection(collectionName).add(it.next());
+      for (HashMap<String, Object> document : documents){
+        DB.collection(collectionName).add(document);
       }
     }
 }

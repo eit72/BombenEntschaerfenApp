@@ -30,7 +30,7 @@ public class OverviewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_overview);
 
 
-        handler = new BeaconHandler(getApplicationContext(), getUUID(), new BeaconHandlerCallback() {
+        handler = BeaconHandler.getHandler(getApplicationContext(), new BeaconHandlerCallback() {
 
             @Override
             public void OnConnected() {
@@ -42,6 +42,9 @@ public class OverviewActivity extends AppCompatActivity {
                 NotifyChanged(id);
             }
         });
+
+        this.handler.listenToNext();
+
 
         this.beaconViewDetails.addAll(handler.getAllBeacons());
 

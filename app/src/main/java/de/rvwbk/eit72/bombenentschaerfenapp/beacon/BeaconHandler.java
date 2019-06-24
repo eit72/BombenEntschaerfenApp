@@ -10,10 +10,12 @@ import com.estimote.coresdk.service.BeaconManager;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
 public class BeaconHandler{
+    private static BeaconHandler INSTANCE = new BeaconHandler();
+    private static UUID uuid = UUID.fromString("B9407F30-F5F8-466E-AFF9-25556B57FE6D");
+
     private Context context;
     private BeaconManager beaconManager;
     private ArrayList<BeaconRegion> regions;
@@ -22,9 +24,14 @@ public class BeaconHandler{
     private int currentIndex = -1;
     private boolean isConnected = false;
 
-    public BeaconHandler(Context context, final UUID uuid, final BeaconHandlerCallback callback){
-       this.context = Objects.requireNonNull(context, "context must not be null");
-       this.callback = callback;
+public static BeaconHandler getHandler(Context context, BeaconHandlerCallback callback){
+    INSTANCE.setContext(context);
+    INSTANCE.setCallback(callback);
+
+    return INSTANCE;
+}
+
+    private BeaconHandler(){
         beans = BeaconFactory.getBeans(uuid);
         beaconManager = new BeaconManager(context);
         beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
@@ -53,6 +60,14 @@ public class BeaconHandler{
         });
 
         beaconManager.setBackgroundScanPeriod(1000, 1000);
+    }
+
+    private void setContext(Context context){
+    this.context = context;
+    }
+
+    private void setCallback(BeaconHandlerCallback callback){
+    this.callback = callback;
     }
 
     public BeaconBean getBeacon(String identifier){

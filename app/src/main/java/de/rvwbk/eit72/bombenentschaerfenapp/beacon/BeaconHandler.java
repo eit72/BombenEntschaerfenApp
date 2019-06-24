@@ -70,7 +70,7 @@ public class BeaconHandler {
 
         if (currentIndex != -1){
             BeaconBean beacon = beans.get(currentIndex);
-            SetBeaconStatus(beacon, BeaconStatus.PENDING);
+            SetBeaconStatus(beacon, BeaconStatus.PASSED);
             beaconManager.stopMonitoring(beacon.getBeaconRegion().getIdentifier());
         }
 

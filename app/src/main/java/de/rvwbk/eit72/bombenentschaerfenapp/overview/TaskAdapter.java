@@ -49,11 +49,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.MyViewHolder> 
         // Hier noch die Abfrage welchen Status die verschiedenen Aufgaben haben. (Testweise anhand der Position festgelegt)
         // Abfrage in welchem Status sich eine Aufgabe befindet
         switch (mDataset.get(position).getStatus()) {
-            case ACTIVE:
-                holder.textView.setText(mDataset.get(position).getHintText());
-                break;
-
             case PASSED:
+                System.out.println("PASSED");
                 holder.itemView.findViewById(R.id.disabled).setActivated(true);
                 holder.itemView.findViewById(R.id.timeline).setBackgroundColor(Color.rgb(153, 153, 153));
                 holder.itemView.findViewById(R.id.dot).setActivated(true);
@@ -61,10 +58,18 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.MyViewHolder> 
                 break;
 
             case PENDING:
+                System.out.println("PENDING");
                 holder.itemView.findViewById(R.id.timeline).setBackgroundColor(Color.rgb(153, 153, 153));
                 holder.itemView.findViewById(R.id.dot).setActivated(true);
                 break;
+
+            case ACTIVE:
+                System.out.println("ACTIVE");
+                holder.textView.setText(mDataset.get(position).getHintText());
+                break;
         }
+
+
        //  holder.itemView.setEnabled(false);
     }
 

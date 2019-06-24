@@ -40,7 +40,7 @@ public class BeaconBean implements Comparable<BeaconBean>{
         return hintText;
     }
 
-    public BeaconRegion getBeaconRegion() {return beaconRegion; }
+    public BeaconRegion getBeaconRegion() { return beaconRegion; }
 
     @Override
     public int compareTo(@NonNull BeaconBean o) {
@@ -63,6 +63,11 @@ public class BeaconBean implements Comparable<BeaconBean>{
         BeaconBean other = (BeaconBean) obj;
 
         return (other.uuid.equals(this.uuid) && other.major == this.major && other.minor == this.minor && other.id == this.id && this.gameActivity.equals(other.gameActivity) && this.hintText.equals(other.hintText));
+    }
+
+    @Override
+    public String toString() {
+        return String.format("BeaconBean (id: %d, minor: %d, major: %d, HasRegion: %b)", getId(), minor, major, beaconRegion.getIdentifier(), beaconRegion != null);
     }
 
     private static BeaconRegion createRegion(UUID uuid, int major, int minor){

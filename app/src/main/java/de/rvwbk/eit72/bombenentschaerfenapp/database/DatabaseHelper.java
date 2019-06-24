@@ -13,6 +13,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -47,5 +48,9 @@ public class DatabaseHelper {
       for (HashMap<String, Object> document : documents){
         DB.collection(collectionName).add(document);
       }
+    }
+
+    public static void updateQuest(String questId, HashMap<String, Object> document){
+      insertCollection("Quest", Arrays.asList(document));
     }
 }

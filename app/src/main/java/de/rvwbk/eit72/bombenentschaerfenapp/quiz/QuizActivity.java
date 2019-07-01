@@ -6,15 +6,19 @@ import android.view.View;
 import android.widget.Button;
 import android.support.v7.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 import de.rvwbk.eit72.bombenentschaerfenapp.MainActivity;
 import de.rvwbk.eit72.bombenentschaerfenapp.R;
 
 public class QuizActivity extends AppCompatActivity {
     private int points;
+    private int questionIndex = 0;
 
-    String question = "does this work?";
-    String answer = "true";
-    String[] answers = {"false","false","true","false"};
+    ArrayList<Question> questionList = Question.getDefaultQuestionList();
+    String question = questionList.get(questionIndex).getQuestion();
+    String answer = questionList.get(questionIndex).getAnswer();
+    String[] answers = questionList.get(questionIndex).getAnswers();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,5 +67,24 @@ public class QuizActivity extends AppCompatActivity {
                 System.out.println("questionSolved: " + questionSolved);
             }
         }
+
+        question = questionList.get(questionIndex).getQuestion();
+        answer = questionList.get(questionIndex).getAnswer();
+        answers = questionList.get(questionIndex).getAnswers();
+        Button startButton = findViewById(R.id.button_quiz_start);
+        //Intent intent = getIntent();
+
+        startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent questionIntent = new Intent(QuizActivity.this, QuizQuestionActivity.class);
+                questionIntent.putExtra("question", question);
+                questionIntent.putExtra("answer", answer);
+                questionIntent.putExtra("answers", answers);
+                startActivityForResult(questionIntent, MainActivity.QUIZREQUESTCODE);
+            }
+        });
     }
+
+
 }
